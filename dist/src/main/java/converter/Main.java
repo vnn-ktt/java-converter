@@ -6,14 +6,12 @@ import java.awt.event.*;
 
 public class Main {
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Radix Converter");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.getContentPane().add(new ConverterPanel());
-            frame.setPreferredSize(new Dimension(900, 180));
-            frame.pack();
-            frame.setVisible(true);
-        });
+        JFrame frame = new JFrame("Radix Converter");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(new ConverterPanel());
+        frame.setPreferredSize(new Dimension(900, 180));
+        frame.pack();
+        frame.setVisible(true);
     }
 }
 
