@@ -3,15 +3,51 @@ import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Radix Converter");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new ConverterPanel());
-        frame.setPreferredSize(new Dimension(900, 180));
-        frame.pack();
-        frame.setVisible(true);
+        if(args.length == 0){
+            JFrame frame = new JFrame("Radix Converter");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.getContentPane().add(new ConverterPanel());
+            frame.setPreferredSize(new Dimension(900, 180));
+            frame.pack();
+            frame.setVisible(true);
+        } else {
+            String inputFilePath = args[0];
+            String outputFilePath = args[1];
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(inputFilePath));
+                BufferedWriter writer = new BufferedWriter(new FileWriter(outputFilePath));
+                String line;               
+                String[] parts = line.split(";");
+                if (parts.length != 3) {
+                    writer.write("3");
+                    
+                }
+                try {
+                    String number = parts[0];
+                    int sourceBase = Integer.parseInt(parts[1]);
+                    int targetBase = Integer.parseInt(parts[2]);
+                    String result = Worker.convert(number, sourceBase, targetBase);
+                    writer.write(result);
+                } catch (NumberFormatException ex) {
+                    writer.write(ex.getMessage());
+                }
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Программа закончила выполнение с кодом \'XXX\' - проверяйте директорию с целевыми файлами.");
+        }
     }
 }
 
@@ -56,6 +92,7 @@ class ConverterPanel extends JPanel {
         resultTextArea.setWrapStyleWord(true);
         resultTextArea.setLineWrap(true);
         resultTextArea.setBorder(new EmptyBorder(15, 15, 15, 15));
+        resultTextArea.setFont(new Font("Tahoma", Font.BOLD,16));
         resultPanel.add(resultTextArea, BorderLayout.CENTER);
 
         add(resultPanel, BorderLayout.CENTER); 

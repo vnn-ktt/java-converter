@@ -5,18 +5,16 @@ public class Worker {
     public static String convert(String input, int sourceBase, int targetBase) {
         try {
             BigInteger number = new BigInteger(input, sourceBase);
-            if (number.compareTo(BigInteger.ZERO) < 0) {
-                throw new IllegalArgumentException("Входное число должно быть неотрицательно...");
-            }else if (sourceBase == targetBase) {
-               throw new IllegalArgumentException("Указаны одинаковые системы счисления...");
-           }
+            if (number.intValue() < 0) {
+                throw new IllegalArgumentException("[...1 - входное число отрицательно...]");
+            }
             String result = number.toString(targetBase);
             if (result.length() > 256) {
-                throw new IllegalArgumentException("Результат превышает 256 символов...");
+                throw new IllegalArgumentException("[...4 - в результате число с более чем 256 символов...]");
             }
             return result;       
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Неверные входные данные...");
+            throw new IllegalArgumentException("[...3 - число неправильно записано...]");
         }
     }
 }
