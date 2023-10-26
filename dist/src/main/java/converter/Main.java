@@ -5,12 +5,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigInteger;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,12 +23,22 @@ public class Main {
             String outputFilePath = args[1];
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(inputFilePath));
-                BufferedWriter writer = new BufferedWriter(new FileWriter(outputFilePath));
-                String line;               
+                BufferedWriter writer = new BufferedWriter(new FileWriter(outputFilePath));   
+                String line = reader.readLine();      
+                if(line == null){
+                    writer.write("[...5 - файл \"input\" пустой...]");
+                    reader.close();
+                    writer.close(); 
+                    System.out.println("[...5 - файл \"input\" пустой...]");
+                    System.exit(5);
+                }    
                 String[] parts = line.split(";");
                 if (parts.length != 3) {
-                    writer.write("3");
-                    
+                    writer.write("[...3 - число неправильно записано...]");
+                    reader.close();
+                    writer.close(); 
+                    System.out.println("[...3 - число неправильно записано...]");
+                    System.exit(3);
                 }
                 try {
                     String number = parts[0];
@@ -41,12 +48,13 @@ public class Main {
                     writer.write(result);
                 } catch (NumberFormatException ex) {
                     writer.write(ex.getMessage());
+                    System.out.println(ex.getMessage());
                 }
+                reader.close();
                 writer.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("Программа закончила выполнение с кодом \'XXX\' - проверяйте директорию с целевыми файлами.");
         }
     }
 }
