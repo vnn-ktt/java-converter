@@ -1,1 +1,3 @@
-java Main D:\Dev\Java\Converter\dist\files/input.txt D:\Dev\Java\Converter\dist\files/output.txt
+[D:\Dev\Java\java-converter\dist\target\classes> java converter/Main]
+
+java converter/Main D:\Dev\Java\java-converter\test\input.txt D:\Dev\Java\java-converter\test\output.txt

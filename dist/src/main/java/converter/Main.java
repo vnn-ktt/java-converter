@@ -3,11 +3,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -46,7 +42,7 @@ public class Main {
                     int targetBase = Integer.parseInt(parts[2]);
                     String result = Worker.convert(number, sourceBase, targetBase);
                     writer.write(result);
-                } catch (NumberFormatException ex) {
+                } catch (IllegalArgumentException ex) {
                     writer.write(ex.getMessage());
                     System.out.println(ex.getMessage());
                 }
